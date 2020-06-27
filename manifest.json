@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "Caravan",
+  "version": "1.0",
+  "description": "",
+  "content_scripts": [
+    {
+      "matches": ["*://*.amazon.com/*"],
+      "js": ["prices.js"]
+    }
+  ],
+  "permissions": ["*://*.camelcamelcamel.com/product/*"]
+}
