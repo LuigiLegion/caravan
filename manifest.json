@@ -6,7 +6,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.amazon.com/*"],
-      "js": ["prices.js"]
+      "js": ["content.js"]
     }
   ],
   "permissions": ["*://*.camelcamelcamel.com/product/*"]
