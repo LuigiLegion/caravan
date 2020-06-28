@@ -1,0 +1,21 @@
+body {
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10em;
+  margin: 1em;
+}
+
+.containee {
+  flex: 1;
+  margin: 1em;
+}
+
+.icon {
+  text-align: center;
+}
