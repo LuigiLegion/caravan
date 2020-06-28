@@ -3,6 +3,9 @@
   "name": "Caravan",
   "version": "1.0",
   "description": "",
+  "background": {
+    "scripts": ["background.js"]
+  },
   "content_scripts": [
     {
       "matches": ["*://*.amazon.com/*"],
