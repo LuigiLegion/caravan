@@ -1,0 +1,35 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+a {
+  color: #039be5;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.text-style-bold {
+  font-weight: bold;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 15em;
+  margin: 0.5em;
+}
+
+.containee {
+  flex: 1;
+  margin: 0.5em;
+}
+
+#icon {
+  margin: 1em;
+}
