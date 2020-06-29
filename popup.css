@@ -1,21 +1,26 @@
 body {
   font-family: sans-serif;
+  text-align: center;
 }
 
-.container {
+.text-style-bold {
+  font-weight: bold;
+}
+
+#container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 10em;
-  margin: 1em;
+  width: 15em;
+  margin: 0.5em;
 }
 
 .containee {
   flex: 1;
-  margin: 1em;
+  margin: 0.5em;
 }
 
-.icon {
-  text-align: center;
+#icon {
+  margin: 1em;
 }
