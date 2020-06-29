@@ -1,46 +1,56 @@
-const queryStr = window.location.search;
-const urlParams = new URLSearchParams(queryStr);
+// Initializations
+const productId = window.location.pathname.split('/dp/')[1].split('/')[0];
+let prices = null;
 
-if (urlParams.has('pd_rd_i')) {
-  const searchQuery = urlParams.get('pd_rd_i');
+if (productId) {
   const xhr = new XMLHttpRequest();
 
   xhr.onload = function() {
-    const prices = Array.from(
-      Array.from(
-        this.responseXML.getElementsByClassName('product_pane')
-      )[0].getElementsByTagName('tr')
-    ).reduce(
-      function(acc, tr, idx) {
-        if (idx > 0) {
-          const tds = Array.from(tr.getElementsByTagName('td'));
-          const type = tds[0].innerText.split(' ')[0];
+    try {
+      prices = Array.from(
+        this.responseXML.getElementsByClassName('product_pane')[0].children[1]
+          .children
+      ).reduce(
+        function(acc, tr) {
+          const tds = tr.children;
+          const type = tds[0].innerText.split(' ')[0].toLowerCase();
 
-          acc[type.toLowerCase()] = {
-            type,
+          acc[type] = {
             price: tds[1].innerText,
             date: tds[2].innerText,
           };
-        }
 
-        return acc;
-      },
-      { url: 'https://camelcamelcamel.com/product/' + searchQuery }
-    );
-
-    applyPrices(prices);
+          return acc;
+        },
+        { url: 'https://camelcamelcamel.com/product/' + productId }
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   xhr.onerror = function() {
     console.error('Error!');
   };
 
-  xhr.open('GET', 'https://camelcamelcamel.com/product/' + searchQuery, true);
+  xhr.open('GET', 'https://camelcamelcamel.com/product/' + productId, true);
 
   xhr.responseType = 'document';
   xhr.send();
 }
 
-function applyPrices(prices) {
-  console.log({ prices });
-}
+// Notify background script that active tab should have page action
+browser.runtime.sendMessage({
+  from: 'content',
+  subject: 'showPageAction',
+});
+
+// Listeners
+// Listen for messages from popup script
+browser.runtime.onMessage.addListener(function(message, _, response) {
+  // Validate message structure
+  if (message.from === 'popup' && message.subject === 'DOMData') {
+    // Respond to popup script with necessary data using specified callback
+    response(prices);
+  }
+});
