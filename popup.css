@@ -1,10 +1,12 @@
 body {
+  color: #444444;
+  background-color: #eeeeee;
   font-family: sans-serif;
   text-align: center;
 }
 
 a {
-  color: #039be5;
+  color: #007acc;
   text-decoration: none;
 }
 
